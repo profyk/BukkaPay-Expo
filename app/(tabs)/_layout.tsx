@@ -1,21 +1,23 @@
 import { Tabs } from "expo-router";
 import { View, StyleSheet } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { useTheme } from "../../lib/ThemeContext";
 
 const PRIMARY = "#7C3AED";
-const INACTIVE = "#9CA3AF";
 
 export default function TabLayout() {
+  const { colors } = useTheme();
+
   return (
     <Tabs
       screenOptions={{
         headerShown: false,
         tabBarActiveTintColor: PRIMARY,
-        tabBarInactiveTintColor: INACTIVE,
+        tabBarInactiveTintColor: colors.textMuted,
         tabBarStyle: {
-          backgroundColor: "#FFFFFF",
+          backgroundColor: colors.tabBarBg,
           borderTopWidth: 1,
-          borderTopColor: "#F3F4F6",
+          borderTopColor: colors.tabBarBorder,
           height: 70,
           paddingBottom: 10,
           paddingTop: 8,
@@ -25,28 +27,21 @@ export default function TabLayout() {
           shadowOpacity: 0.05,
           shadowRadius: 8,
         },
-        tabBarLabelStyle: {
-          fontSize: 10,
-          fontWeight: "600",
-        },
+        tabBarLabelStyle: { fontSize: 10, fontWeight: "600" },
       }}
     >
       <Tabs.Screen
         name="index"
         options={{
           title: "Home",
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="home-outline" size={size} color={color} />
-          ),
+          tabBarIcon: ({ color, size }) => <Ionicons name="home-outline" size={size} color={color} />,
         }}
       />
       <Tabs.Screen
         name="wallet"
         options={{
           title: "Cards",
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="wallet-outline" size={size} color={color} />
-          ),
+          tabBarIcon: ({ color, size }) => <Ionicons name="wallet-outline" size={size} color={color} />,
         }}
       />
       <Tabs.Screen
@@ -65,18 +60,14 @@ export default function TabLayout() {
         name="transfer"
         options={{
           title: "Transfer",
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="swap-horizontal-outline" size={size} color={color} />
-          ),
+          tabBarIcon: ({ color, size }) => <Ionicons name="swap-horizontal-outline" size={size} color={color} />,
         }}
       />
       <Tabs.Screen
         name="profile"
         options={{
           title: "Profile",
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="person-outline" size={size} color={color} />
-          ),
+          tabBarIcon: ({ color, size }) => <Ionicons name="person-outline" size={size} color={color} />,
         }}
       />
     </Tabs>
@@ -85,17 +76,10 @@ export default function TabLayout() {
 
 const styles = StyleSheet.create({
   scanButton: {
-    width: 56,
-    height: 56,
-    borderRadius: 28,
-    backgroundColor: PRIMARY,
-    justifyContent: "center",
-    alignItems: "center",
-    marginBottom: 20,
-    shadowColor: PRIMARY,
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.3,
-    shadowRadius: 8,
-    elevation: 8,
+    width: 56, height: 56, borderRadius: 28,
+    backgroundColor: PRIMARY, justifyContent: "center", alignItems: "center",
+    marginBottom: 20, shadowColor: PRIMARY,
+    shadowOffset: { width: 0, height: 4 }, shadowOpacity: 0.3,
+    shadowRadius: 8, elevation: 8,
   },
 });
