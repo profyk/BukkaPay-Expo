@@ -5,6 +5,7 @@ import { useRouter } from "expo-router";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { useToast } from "../hooks/use-toast";
 import { apiRequest, queryClient } from "../lib/queryClient";
+import { API_BASE } from "../lib/config";
 import * as Clipboard from "expo-clipboard";
 
 interface GiftCard {
@@ -170,7 +171,7 @@ export default function GiftCards() {
 
   const lookupMutation = useMutation({
     mutationFn: async (code: string) => {
-      const response = await fetch(`/api/gift-cards/code/${code}`);
+      const response = await fetch(`${API_BASE}/api/gift-cards/code/${code}`);
       if (!response.ok) throw new Error("Gift card not found");
       return response.json();
     },

@@ -5,6 +5,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { useToast } from "../hooks/use-toast";
 import { apiRequest, queryClient } from "../lib/queryClient";
+import { API_BASE } from "../lib/config";
 import type { ContributionGroup, Contribution } from "../../shared/schema";
 
 const categories = [
@@ -32,7 +33,7 @@ export default function Contribute() {
   const { data, isLoading, error } = useQuery<{ group: ContributionGroup; contributions: Contribution[] }>({
     queryKey: ["/api/contributions/code", code],
     queryFn: async () => {
-      const res = await fetch(`/api/contributions/code/${code}`);
+      const res = await fetch(`${API_BASE}/api/contributions/code/${code}`);
       if (!res.ok) throw new Error("Group not found");
       return res.json();
     },

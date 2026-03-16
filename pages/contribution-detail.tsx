@@ -4,6 +4,7 @@ import { useRouter, useLocalSearchParams } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { useQuery } from "@tanstack/react-query";
 import { useToast } from "../hooks/use-toast";
+import { API_BASE } from "../lib/config";
 import * as Clipboard from "expo-clipboard";
 import * as Linking from "expo-linking";
 import type { ContributionGroup, Contribution } from "../../shared/schema";
@@ -83,7 +84,7 @@ export default function ContributionDetail() {
   const { data, isLoading, error } = useQuery<{ group: ContributionGroup; contributions: Contribution[] }>({
     queryKey: ["/api/contributions", id],
     queryFn: async () => {
-      const res = await fetch(`/api/contributions/${id}`);
+      const res = await fetch(`${API_BASE}/api/contributions/${id}`);
       if (!res.ok) throw new Error("Group not found");
       return res.json();
     },

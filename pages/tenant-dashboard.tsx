@@ -4,6 +4,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { useToast } from "../hooks/use-toast";
 import { apiRequest, queryClient } from "../lib/queryClient";
+import { API_BASE } from "../lib/config";
 
 interface PaymentHistory {
   id: string;
@@ -53,7 +54,7 @@ export default function TenantDashboard() {
 
   const lookupMutation = useMutation({
     mutationFn: async (tenantId: string) => {
-      const res = await fetch(`/api/rental/tenant-lookup/${tenantId}`);
+      const res = await fetch(`${API_BASE}/api/rental/tenant-lookup/${tenantId}`);
       if (!res.ok) throw new Error("Tenant not found");
       return res.json();
     },
